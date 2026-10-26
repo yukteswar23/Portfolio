@@ -1,3 +1,4 @@
+
 # Yukteswar Mantha: research portfolio
 
 Static site (HTML/CSS/JS, no build step, no frameworks). The visual language (Space Grotesk + Funnel Display, blue / navy / stone / ink sections, column-grid backdrop, dithered offset shadows, a narrating mascot) follows sebg.ch. All code, copy, art and the mascot (Pip, a map pin) are original.
