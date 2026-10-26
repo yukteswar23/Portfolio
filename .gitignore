@@ -1,0 +1,6 @@
+# source PDFs and the original photo stay local
+*.pdf
+Yuk.jpeg
+# previous design, kept locally for reference
+_old-desk-design/
+docs/

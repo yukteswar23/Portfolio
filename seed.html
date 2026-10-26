@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Seed · Yukteswar Mantha</title>
+  <meta name="description" content="Seed (WWW 2025) and my problem statement: real-time synthetic trajectories from sparse data for Gurgaon." />
+  <meta name="theme-color" content="#0a3149" />
+  <link rel="icon" href="assets/pip.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body data-paper="seed">
+  <a class="skip" href="#problem">Skip to the problem statement</a>
+
+  <main>
+    <!-- ───────── PAPER HERO (accent colour) ───────── -->
+    <section class="paper-hero bg-grid grid-page" data-hold="6000">
+      <header class="topbar">
+        <a class="back" href="index.html#research"><span aria-hidden="true">←</span> Yukteswar Mantha</a>
+        <a class="button" href="#problem">Problem statement <span class="arrow" aria-hidden="true">↓</span></a>
+      </header>
+      <div class="paper-hero-main">
+        <p class="paper-venue-big" id="pVenue"></p>
+        <h1 class="hero-title paper-hero-title"><span class="line" id="pShort"></span></h1>
+        <p class="paper-hero-full" id="pTitle"></p>
+        <p class="paper-hero-authors" id="pAuthors"></p>
+        <a class="button" id="pLink" href="#" target="_blank" rel="noopener"><span id="pLinkLabel">Read the paper</span> <span class="arrow" aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+
+    <!-- ───────── THE PAPER (paper) ───────── -->
+    <section class="paper-detail grid-page" data-say="The short version: <em>what it does</em>, and why I care.">
+      <div class="paper-art reveal" id="pArt"></div>
+      <div class="paper-text reveal">
+        <p class="eyebrow">The paper</p>
+        <p class="paper-summary big" id="pSummary"></p>
+        <ul class="paper-ideas" id="pIdeas"></ul>
+      </div>
+    </section>
+
+    <!-- ───────── PROBLEM STATEMENT INTRO (stone) ───────── -->
+    <section class="problem-intro bg-grid grid-page" id="problem" data-say="This is the question Yuk is <em>chasing</em>.">
+      <p class="eyebrow reveal">My problem statement</p>
+      <h2 class="problem-q reveal" id="probQ"></h2>
+      <div class="problem-cols reveal">
+        <p id="probContext"></p>
+        <p class="paper-why"><b>Where this paper fits.</b> <span id="pWhy"></span></p>
+      </div>
+    </section>
+
+    <!-- ───────── TOUR (navy, pinned) ───────── -->
+    <section class="tour bg-grid" id="tour" data-say-hook aria-label="Animated walkthrough of the problem">
+      <div class="tour-stage grid-page">
+        <div class="tour-head">
+          <p class="eyebrow">Problem statement</p>
+          <h2 class="tour-q" id="tourQuestion"></h2>
+          <ol class="tour-progress" id="tourProgress" aria-hidden="true"></ol>
+        </div>
+        <div class="tour-screen-wrap">
+          <div class="tour-screen">
+            <div class="screen-bar">
+              <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="screen-title" id="tourTitle"></span>
+              <span class="screen-stat" id="tourStat"></span>
+            </div>
+            <canvas id="map" role="img" aria-label="Animated map of Gurgaon's major roads with sparse GPS points and generated trajectories"></canvas>
+            <p class="screen-note">Illustrative animation, not model output · Roads © OpenStreetMap contributors</p>
+          </div>
+        </div>
+      </div>
+      <div class="tour-steps" id="tourSteps"></div>
+    </section>
+
+    <!-- ───────── NEXT + CONTACT (ink) ───────── -->
+    <section class="contact contact-short bg-grid grid-page" id="contact" data-say="Want the <em>other paper</em>? It's right there.">
+      <div class="contact-main">
+        <p class="eyebrow">Next paper</p>
+        <a class="next-paper" id="nextPaper" href="#">
+          <span class="next-name" id="nextName"></span>
+          <span class="next-venue" id="nextVenue"></span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+        <p class="eyebrow contact-gap">Say hello</p>
+        <button class="mail" id="mail" type="button" data-email="ymantha23@gmail.com">
+          <span class="mail-text">ymantha23@gmail.com</span>
+          <span class="mail-copied" aria-live="polite"></span>
+        </button>
+      </div>
+      <footer class="footer">
+        <a href="index.html">← Back to the portfolio</a>
+        <span class="footer-actions">
+          <button type="button" class="linkish" id="trickBtn">Do a trick</button>
+          <button type="button" class="linkish" id="rerouteBtn">Reroute Pip</button>
+        </span>
+      </footer>
+    </section>
+  </main>
+
+  <!--PIP-->
+  <div class="mascot" id="mascot">
+    <div class="bubble" id="bubble" role="status" aria-live="polite">
+      <div class="bubble-body"><p id="bubbleText"></p></div>
+      <span class="bubble-tail" aria-hidden="true"></span>
+    </div>
+    <button class="pip" id="pip" type="button" aria-label="Pip the map-pin mascot. Click for a trick.">
+      <span class="pip-burst" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+      <svg viewBox="0 0 120 140" aria-hidden="true">
+        <ellipse class="pip-shadow" cx="60" cy="132" rx="26" ry="5" />
+        <g class="pip-body">
+          <path class="pip-fill" d="M60 8C33 8 14 27 14 52c0 30 34 56 43 70a4 4 0 0 0 6 0c9-14 43-40 43-70C106 27 87 8 60 8Z" />
+          <path class="pip-ring" d="M60 26a24 24 0 1 1 0 48a24 24 0 1 1 0-48Z" />
+          <g class="pip-eyes"><ellipse cx="51" cy="48" rx="4.2" ry="5.6" /><ellipse cx="69" cy="48" rx="4.2" ry="5.6" /></g>
+          <path class="pip-mouth" d="M53 60q7 6 14 0" />
+          <circle class="pip-cheek" cx="43" cy="58" r="3.4" />
+          <circle class="pip-cheek" cx="77" cy="58" r="3.4" />
+          <path class="pip-antenna" d="M60 8V0" />
+          <circle class="pip-led" cx="60" cy="0" r="3.5" />
+        </g>
+      </svg>
+    </button>
+  </div>
+  <!--/PIP-->
+
+  <script src="js/content.js"></script>
+  <script src="js/gurgaon-roads.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/site.js"></script>
+  <script src="js/paper.js"></script>
+</body>
+</html>
