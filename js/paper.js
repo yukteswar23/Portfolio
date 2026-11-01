@@ -29,6 +29,62 @@
   $("#nextVenue").textContent = other.venue;
   $(".paper-hero").dataset.say = "This is <em>" + esc(paper.short) + "</em>. Scroll for the problem it helps with.";
 
+  /* ───────────── Ongoing research (slides) ───────────── */
+  var prog = paper.progress, progEl = $("#progress");
+  if (prog && progEl) {
+    progEl.hidden = false;
+    $("#progTitle").textContent = prog.title;
+    $("#progSummary").textContent = prog.summary;
+    $("#progStats").innerHTML = prog.stats.map(function (s) {
+      return "<div><dt>" + esc(s.value) + "</dt><dd>" + esc(s.label) + "</dd></div>";
+    }).join("");
+    $("#progPdf").href = prog.pdf;
+
+    var slides = prog.slides, cur = -1, img = $("#slideImg");
+    $("#slideThumbs").innerHTML = slides.map(function (s, i) {
+      return '<li><button type="button" data-i="' + i + '" aria-label="Slide ' + (i + 1) + ": " + esc(s.title) + '">' +
+        '<img src="' + esc(s.src) + '" alt="" loading="lazy" width="160" height="90" /></button></li>';
+    }).join("");
+    var thumbs = progEl.querySelectorAll(".slide-thumbs button");
+    function show(i) {
+      i = (i + slides.length) % slides.length;
+      if (i === cur) return;
+      cur = i;
+      var s = slides[i];
+      img.src = s.src;
+      $("#slideLink").href = s.src;
+      img.alt = "Slide " + (i + 1) + ": " + s.title;
+      $("#slideCount").textContent = String(i + 1).padStart(2, "0") + " / " + String(slides.length).padStart(2, "0");
+      $("#slideTitle").textContent = s.title + ".";
+      $("#slideNote").textContent = s.note;
+      thumbs.forEach(function (t, k) { t.setAttribute("aria-current", k === i ? "true" : "false"); });
+      // scroll only the thumb strip, never the page
+      var strip = $("#slideThumbs"), t = thumbs[i];
+      strip.scrollTo({ left: t.offsetLeft - (strip.clientWidth - t.offsetWidth) / 2, behavior: reduced ? "auto" : "smooth" });
+      // warm the next slide so stepping through feels instant
+      new Image().src = slides[(i + 1) % slides.length].src;
+    }
+    $("#slidePrev").addEventListener("click", function () { show(cur - 1); });
+    $("#slideNext").addEventListener("click", function () { show(cur + 1); });
+    $("#slideThumbs").addEventListener("click", function (e) {
+      var b = e.target.closest("button");
+      if (b) show(+b.dataset.i);
+    });
+    $("#slides").addEventListener("keydown", function (e) {
+      if (e.key === "ArrowLeft") { show(cur - 1); e.preventDefault(); }
+      else if (e.key === "ArrowRight") { show(cur + 1); e.preventDefault(); }
+    });
+    // swipe on touch screens
+    var x0 = null;
+    img.addEventListener("touchstart", function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+    img.addEventListener("touchend", function (e) {
+      if (x0 === null) return;
+      var dx = e.changedTouches[0].clientX - x0; x0 = null;
+      if (Math.abs(dx) > 40) show(cur + (dx < 0 ? 1 : -1));
+    });
+    show(0);
+  }
+
   /* ───────────── Tour ───────────── */
   var TOUR = paper.tour;
   $("#tourQuestion").innerHTML = $("#probQ").innerHTML;

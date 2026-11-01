@@ -44,6 +44,34 @@ SITE.papers = [
       { mode: "seed", title: "Seed: one segment at a time", pre: "Seed fills the gaps", em: "segment by segment", post: ", like a sentence." },
       TOUR_END,
     ]),
+    // Ongoing work: slides rendered from Seed_Pl.pdf into assets/seed-progress/.
+    progress: {
+      title: "Can sparse Porto stand in for Gurgaon?",
+      summary:
+        "Before training on Gurgaon, I thin the dense Porto taxi data until it looks like Gurgaon's sparse GPS, then retrain Seed on it. " +
+        "These are intermediate results: what the calibration matches, where it still differs, and how Seed holds up on 8.7% of the paper's data.",
+      stats: [
+        { value: "0.80 → 0.05", label: "KS distance to Gurgaon trip lengths, raw vs. sparsified Porto" },
+        { value: "8,449", label: "trajectories in the sparse run, 8.7% of the paper's sample" },
+        { value: "1st of 9", label: "on Density, Flow and G-rank at epoch 160, against Porto baselines" },
+        { value: "0.111", label: "unique-trajectory share by epoch 380, as paths collapse onto a few corridors" },
+      ],
+      pdf: "assets/seed-progress/seed-sparse-porto.pdf",
+      slides: [
+        { title: "Sparse Porto as a Gurgaon proxy", note: "How far does sparsity-calibrated Porto reproduce what matters for evaluating Seed on Gurgaon?" },
+        { title: "Calibration works at the CSV stage", note: "Trip lengths match closely: median 7 for both, KS distance 0.0497." },
+        { title: "The spatial footprint is thinned, not shifted", note: "Sparsification drops trips but keeps their original coordinates." },
+        { title: "Pipeline retention is dominated by early filters", note: "1.71M raw trips become about 9,000 rows; date and taxi-day filters remove most." },
+        { title: "Matching totals still leaves structural gaps", note: "Gurgaon's dates come in two blocks and device activity is heavy-tailed; sparse Porto is uniform." },
+        { title: "Map matching changes the sequence lengths", note: "Fixed-length resampling spikes at 20; KS distance rises to 0.5978 after map matching." },
+        { title: "The Seed comparison uses a much smaller sample", note: "Same model and road network, 8,449 vs. 96,896 trajectories." },
+        { title: "Connectivity rises as diversity falls", note: "Epoch 380 is ~99% connected but repeats a few corridors." },
+        { title: "Epoch 160 is the useful comparison point", note: "Near paper metrics, better on Density and Flow. Chosen after seeing test JSD, so optimistic." },
+        { title: "How sparse Seed ranks against Porto baselines", note: "Competitive at epoch 160; different test sets, so ranks are not a claim of better realism." },
+        { title: "Porto trajectory sparsification → Gurgaon (1/2)", note: "Example trips, coloured by subsampling scale factor from dense to most sparse." },
+        { title: "Porto trajectory sparsification → Gurgaon (2/2)", note: "More example trips across subsampling levels." },
+      ].map(function (s, i) { return Object.assign({ src: "assets/seed-progress/slide-" + String(i + 1).padStart(2, "0") + ".jpg" }, s); }),
+    },
   },
   {
     id: "controltraj",

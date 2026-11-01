@@ -1,5 +1,7 @@
 # source PDFs and the original photo stay local
 *.pdf
+# ...except the slides published on the Seed page
+!assets/seed-progress/*.pdf
 Yuk.jpeg
 # previous design, kept locally for reference
 _old-desk-design/
