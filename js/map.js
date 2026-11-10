@@ -168,8 +168,19 @@
       '<rect x="128" y="120" width="60" height="4" rx="2" fill="#0b0b0c" opacity=".2"/><rect x="128" y="130" width="44" height="4" rx="2" fill="#0b0b0c" opacity=".2"/></g></svg>';
   }
 
+  function weightsArt() {
+    var r = rng(23), cells = "";
+    // a classifier weight matrix; one outlier weight carries the backdoor
+    for (var y = 0; y < 8; y++) for (var x = 0; x < 12; x++) {
+      var hot = x === 8 && y === 2, v = hot ? 1 : 0.12 + r() * 0.5;
+      cells += '<rect x="' + (x * 22 + 18) + '" y="' + (y * 22 + 12) + '" width="18" height="18" rx="3" fill="' + (hot ? "#ffe64e" : "#fbfbf8") + '" fill-opacity="' + v.toFixed(2) + '"/>';
+    }
+    return '<svg viewBox="0 0 300 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true">' + cells +
+      '<circle cx="203" cy="65" r="22" fill="none" stroke="#ffe64e" stroke-width="3"/><path d="M219 81l22 22" stroke="#ffe64e" stroke-width="5" stroke-linecap="round"/></svg>';
+  }
+
   window.MAP = {
     ROADS: ROADS, graph: graph, rng: rng, randomWalk: randomWalk, resample: resample, M_PER_UNIT: M_PER_UNIT,
-    art: { seed: seedArt, controltraj: controlArt, vision: visionArt, llm: llmArt, cookbook: cookbookArt },
+    art: { seed: seedArt, controltraj: controlArt, vision: visionArt, llm: llmArt, cookbook: cookbookArt, weights: weightsArt },
   };
 })();
