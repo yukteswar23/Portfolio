@@ -117,7 +117,7 @@ SITE.work = [
     kind: "LLMs · ML security",
     accent: "#8a2b3d",
     art: "weights",
-    text: "Can an LLM find and remove a backdoor by reading a network's weights? A 120-model CIFAR-10 zoo and the baselines it must beat: weights alone detect backdoors at AUROC 0.94, but name the target only 55% of the time.",
+    text: "Can an LLM find and remove a backdoor just by reading a network's weights? A 120-model testbed and the baselines to beat.",
     href: "assets/weight-space-programming/weight-space-auditing-report.pdf",
   },
   {
