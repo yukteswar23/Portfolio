@@ -28,5 +28,8 @@ Everything is in `js/content.js`: bio line, problem statement, each paper's summ
 - `assets/weight-space-programming/`: the Weight Space Programming report PDF (copied from `Weight_Space_Programming.pdf`), linked from its card.
 - `assets/pip.svg`: favicon (Pip, the site's original map-pin mascot)
 
+## Cache busting
+Every page loads its CSS/JS with `?v=YYYYMMDD`. After changing `css/` or `js/`, bump that number in `index.html`, `seed.html` and `controltraj.html` so returning visitors get the new files instead of a cached copy.
+
 ## Deploy (GitHub Pages)
 Push to a repo named `yukteswar23.github.io` (`.gitignore` leaves out the source PDFs and `_old-desk-design/`, but keeps `assets/seed-progress/*.pdf` and `assets/weight-space-programming/*.pdf`), then go to Settings → Pages → Deploy from branch → `main` / root.
